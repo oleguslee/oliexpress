@@ -1,12 +1,11 @@
 <h1 style='margin: 1em'>Edit a sale</h1>
-{{!-- {{#if goodEdit}} --}}
 <form name='goodsFormEdit' method='POST' action='/create/{{goodEdit._id}}'>
   <div class='input-group mb-3'>
     <select name='category' class='form-control' id='exampleFormControlSelect2'>
       {{#each categoryEdit}}
-       {{#if this._id === categoryEdit}}  
-        <option value={{this._id}} selected='selected'>{{this.name}}</option>
-      {{else}}
+        {{!-- {{#if this._id === categoryEdit}}   --}}
+        {{!-- <option value={{this._id}} selected='selected'>{{this.name}}</option>
+      {{else}} --}}
         <option value={{this._id}}>{{this.name}}</option>
 
       {{/each}}
@@ -37,6 +36,5 @@
     <input name='price' type='text' class='form-control' value='{{goodEdit.price}}' />
     <span class='input-group-text'>₩</span>
   </div>
-  <button type='submit' class='btn btn-primary'>Edit</button>
+  <button type='submit' class='btn btn-outline-primary'>Edit</button>
 </form>
-{{!-- {{/if}} --}}

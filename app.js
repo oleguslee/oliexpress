@@ -3,6 +3,7 @@
 const express = require('express')
 const connect = require('./src/db/config/connect')
 const hbs = require('hbs')
+const session = require('express-session')
 const path = require('path')
 const morgan = require("morgan")
 const app = express()
@@ -21,6 +22,19 @@ hbs.registerPartials(path.resolve("src", "views", "partials"))
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(session({    //мидлвар express-session
+  secret: 'thisissecretkeyTssssssss!',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false },   //true для https
+
+}))
+app.use((req, res, next) => {    //мидлвар локальной переменной
+  res.locals.username = req.session.username;
+  next()
+})
+
 
 app.use('/user', userRouter)
 app.use('/create', createRouter)

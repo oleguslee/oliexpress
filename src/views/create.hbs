@@ -34,7 +34,7 @@
     <input name='price' type='text' class='form-control' />
     <span class='input-group-text'>₩</span>
   </div>
-  <button type='submit' class='btn btn-primary'>Create</button>
+  <button type='submit' class='btn btn-outline-primary'>Create</button>
 </form>
 
 <h1 style='margin: 1em'>Your goods</h1>
@@ -51,8 +51,8 @@
                 <h5 class="card-title">Description: {{this.description}}</h5>
                 <h5 class="card-title">Quantity: {{this.quantity}}</h5>
                 <h5 class="card-title">Price: {{this.price}} ₩</h5>
-                <a href="create/{{this._id}}" class="btn btn-primary">Edit</a>
-                <button data-delete type="button" class="btn btn-danger">Delete</button>
+                <a href="create/{{this._id}}" class="btn btn-outline-primary">Edit</a>
+                <button data-delete type="button" class="btn btn-outline-danger">Delete</button>
             </div>
         </div>
     </div>

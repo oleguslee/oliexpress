@@ -6,17 +6,17 @@ const router = require('express').Router()
 router
   .route('/')
   .get(async (req, res) => {
-    const listGoods = await Good.find().populate('category')
+    const listGoods = await Good.find().populate('category').lean()
     const listCategory = await Category.find()
-    console.log('listCategory', listCategory)
     res.render('create', { listGoods, listCategory })
   })
 
   .post(async (req, res) => {
     const good = req.body
+    const categoryId = req.body.category
+    console.log(req.body)
     const newGood = await Good.create(good)
-    console.log(newGood)
-    res.json(newGood)
+    res.json(newGood) //  KAK PEREEEDATTT KATEGGOOOOOORIYUUU NAMEEEE!?
   })
 //--------------------------------------
 
