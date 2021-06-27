@@ -1,0 +1,60 @@
+<h1 style='margin: 1em'>Create a sale</h1>
+<form name='goodsForm' method='POST' action='/create'>
+  <div class='input-group mb-3'>
+    <span class='input-group-text' id='basic-addon1'>Category</span>
+    <select name='category' class='form-control' id='exampleFormControlSelect2'>
+      
+      {{#each listCategory}}
+        <option value={{this._id}}>{{this.name}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class='input-group mb-3'>
+    <span class='input-group-text' id='basic-addon1'>Title</span>
+    <input name='title' type='text' class='form-control' placeholder='' />
+  </div>
+
+  <div class='input-group mb-3'>
+    <span class='input-group-text' id='basic-addon1'>Quantity</span>
+    <input name='quantity' type='text' class='form-control' placeholder='' />
+  </div>
+
+  <div class='input-group mb-3'>
+    <span class='input-group-text' id='basic-addon3'>Image URL</span>
+    <input name='picture' type='text' class='form-control' id='basic-url' />
+  </div>
+
+  <div class='input-group mb-3'>
+    <span class='input-group-text'>Description</span>
+    <textarea name='description' class='form-control'></textarea>
+  </div>
+
+  <div class='input-group mb-3'>
+    <span class='input-group-text'>Price</span>
+    <input name='price' type='text' class='form-control' />
+    <span class='input-group-text'>₩</span>
+  </div>
+  <button type='submit' class='btn btn-primary'>Create</button>
+</form>
+
+<h1 style='margin: 1em'>Your goods</h1>
+<div class="row" id="goodContainer">
+    {{#if listGoods}}
+    {{#each listGoods}}
+
+    <div data-id="{{this._id}}" class="col-4 my-2">
+        <div class="card  w-100 h-100" style="width: 18rem;">
+            <img src="{{this.picture}}" class="card-img-top" width="250" height="250" alt="{{this.title}}">
+            <div class="card-body">
+                <h5 class="card-title">Category: {{this.category.name}}</h5>
+                <h5 class="card-title">Title: {{this.title}}</h5>
+                <h5 class="card-title">Description: {{this.description}}</h5>
+                <h5 class="card-title">Quantity: {{this.quantity}}</h5>
+                <h5 class="card-title">Price: {{this.price}} ₩</h5>
+                <a href="create/{{this._id}}" class="btn btn-primary">Edit</a>
+                <button data-delete type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    {{/if}}
