@@ -1,7 +1,5 @@
 const $goodsForm = document.forms.goodsForm;
 const $goodsContainer = document.getElementById('goodContainer')
-console.log($goodsContainer)
-
 
 //create
 $goodsForm?.addEventListener('submit', async (e) => {

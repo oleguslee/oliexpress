@@ -1,4 +1,29 @@
 <div class='index-flex'>
-  <h1 class='index-h1'>About service</h1>
-  <a href='/user/registration'><button type='button' class='btn btn-outline-primary index-btn'>Sign up</button></a>
+  <h1 style='margin-top: 35px'>All goods
+<div>
+  <div class='row' id='goodContainerIndex'>
+    {{#if listGoods}}
+      {{#each listGoods}}
+        <div data-id='{{this._id}}' class='col-4 my-2'>
+          <div class='card w-100 h-100' style='width: 18rem;'>
+            <img
+              src='{{this.picture}}'
+              class='card-img-top'
+              width='250'
+              height='250'
+              alt='{{this.title}}'
+            />
+            <div class='card-body'>
+              <h5 class='card-title'>Category: {{this.category.name}}</h5>
+              <h5 class='card-title'>Title: {{this.title}}</h5>
+              <h5 class='card-title'>Description: {{this.description}}</h5>
+              <h5 class='card-title'>Quantity: {{this.quantity}}</h5>
+              <h5 class='card-title'>Price: {{this.price}} ₩</h5>
+              <button data-cart class='btn btn-outline-primary mt-3'>Add to cart</button>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    {{/if}}
+  </div>
 </div>

@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const User = require('../db/models/User.model')
+const saltRounds = 10 // 0 - шифрование
+const bcrypt = require('bcrypt'); // 1 -  шифрование
 
 router
   .route('/login')
@@ -8,18 +10,24 @@ router
   })
   .post(async (req, res) => {
     try {
-      console.log('reqbody====>', req.body)
-      const { email, password } = req.body
-      const findUser = await User.findOne({ email, password })
-      console.log(findUser)
-      if (findUser) {
-        req.session.username = findUser.name
+      const { name,email, password } = req.body
+      const findUser = await User.findOne({ email })
+      const comparePassword = await bcrypt.compare(password, findUser.password); // 2 - шифрование
+      if (findUser && comparePassword) {
+        req.session.name = findUser.name
+        req.session.userId = findUser._id
+        res.redirect('/create')
       }
-      res.redirect('/create')
     } catch (error) {
+      console.log(error)
       res.redirect('/user/login')
     }
   })
+
+router.get('/logout', (req, res) => {
+  req.session.destroy()
+  res.redirect('/')
+})
 
 router
   .route('/registration')
@@ -28,11 +36,17 @@ router
   })
   .post(async (req, res) => {
     try {
-      console.log('reqbody====>', req.body)
-      await User.create(req.body)
-      req.session.username = req.body.name
-      res.redirect('/create')
-
+      const { name, email, password } = req.body;
+      const hash = await bcrypt.hash(password, saltRounds) // 3 - шифрование
+      const newUser = await User.create({
+        name,
+        email,
+        password: hash, // 4 - шифрование
+      })
+      if (newUser) {
+        req.session.name = newUser.name
+        res.redirect('/create')
+      }
     } catch (error) {
       console.log(error)
       res.redirect('/user/registration')

@@ -1,29 +1,48 @@
 <h1 style='margin: 1em'>Edit a sale</h1>
 <form name='goodsFormEdit' method='POST' action='/create/{{goodEdit._id}}'>
   <div class='input-group mb-3'>
+    <span class='input-group-text' id='basic-addon1'>Category</span>
     <select name='category' class='form-control' id='exampleFormControlSelect2'>
-      {{#each categoryEdit}}
-        {{!-- {{#if this._id === categoryEdit}}   --}}
-        {{!-- <option value={{this._id}} selected='selected'>{{this.name}}</option>
-      {{else}} --}}
-        <option value={{this._id}}>{{this.name}}</option>
-
+      {{#each categoryFlaged}}
+        {{#if this.isCurrent}} 
+          <option value={{this._id}} selected>{{this.name}}</option>
+          {{else}} 
+          <option value={{this._id}}>{{this.name}}</option>
+        {{/if}}
       {{/each}}
     </select>
   </div>
   <div class='input-group mb-3'>
     <span class='input-group-text' id='basic-addon1'>Title</span>
-    <input name='title' type='text' class='form-control' placeholder='' value='{{goodEdit.title}}' />
+    <input
+      name='title'
+      type='text'
+      class='form-control'
+      placeholder=''
+      value='{{goodEdit.title}}'
+    />
   </div>
 
   <div class='input-group mb-3'>
     <span class='input-group-text' id='basic-addon1'>Quantity</span>
-    <input name='quantity' type='text' class='form-control' placeholder='' value='{{goodEdit.quantity}}' />
+    <input
+      name='quantity'
+      type='text'
+      class='form-control'
+      placeholder=''
+      value='{{goodEdit.quantity}}'
+    />
   </div>
 
   <div class='input-group mb-3'>
     <span class='input-group-text' id='basic-addon3'>Image URL</span>
-    <input name='picture' type='text' class='form-control' id='basic-url' value='{{goodEdit.picture}}' />
+    <input
+      name='picture'
+      type='text'
+      class='form-control'
+      id='basic-url'
+      value='{{goodEdit.picture}}'
+    />
   </div>
 
   <div class='input-group mb-3'>
