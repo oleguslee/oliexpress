@@ -2,6 +2,7 @@ const router = require('express').Router()
 const User = require('../db/models/User.model')
 const saltRounds = 10 // 0 - шифрование
 const bcrypt = require('bcrypt'); // 1 -  шифрование
+const Cart = require('../db/models/Cart.model');
 
 router
   .route('/login')
@@ -10,7 +11,7 @@ router
   })
   .post(async (req, res) => {
     try {
-      const { name,email, password } = req.body
+      const { name, email, password } = req.body
       const findUser = await User.findOne({ email })
       const comparePassword = await bcrypt.compare(password, findUser.password); // 2 - шифрование
       if (findUser && comparePassword) {
@@ -45,6 +46,8 @@ router
       })
       if (newUser) {
         req.session.name = newUser.name
+        req.session.userId = newUser._id
+        await Cart.create({ buyer: newUser._id })
         res.redirect('/create')
       }
     } catch (error) {

@@ -4,7 +4,7 @@
   <div class='row' id='goodContainerIndex'>
     {{#if listGoods}}
       {{#each listGoods}}
-        <div data-id='{{this._id}}' class='col-4 my-2'>
+        <div data-id='{{this._id}}' data-quantity="{{quantity}}" class='col-4 my-2'>
           <div class='card w-100 h-100' style='width: 18rem;'>
             <img
               src='{{this.picture}}'
@@ -17,9 +17,9 @@
               <h5 class='card-title'>Category: {{this.category.name}}</h5>
               <h5 class='card-title'>Title: {{this.title}}</h5>
               <h5 class='card-title'>Description: {{this.description}}</h5>
-              <h5 class='card-title'>Quantity: {{this.quantity}}</h5>
+              <h5 class='card-title' id='quantity'>Quantity: {{this.quantity}}</h5>
               <h5 class='card-title'>Price: {{this.price}} ₩</h5>
-              <button data-cart class='btn btn-outline-primary mt-3'>Add to cart</button>
+              <a data-cart="{{this._id}}" href="#" class="btn btn-outline-primary mt-3">Add to card</a>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ const Good = model('Good', {
   title: { type: String, required: true },
   description: { type: String },
   price: { type: Number, required: true },
-  quantity: { type: Number, default: 0 },
+  quantity: { type: Number, default: 0, min: 0 },
   category: { type: Schema.Types.ObjectId, ref: 'Category' },
   seller: { type: Schema.Types.ObjectId, ref: 'User' },
 });

@@ -5,7 +5,6 @@ const $goodsContainer = document.getElementById('goodContainer')
 $goodsForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = Object.fromEntries(new FormData(e.target));
-  console.log('formData', formData)
   const response = await fetch('/create', {
     method: "POST",
     headers: {
